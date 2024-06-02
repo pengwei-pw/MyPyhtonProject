@@ -17,10 +17,31 @@ def soundfile_read():
     print(f"data1:{data1} \n sr:{sr}")
     rms = [np.sqrt(np.mean(block ** 2)) for block in
            sf.blocks(wav_path, blocksize=1024, overlap=512)]
+    # list_data = []
+    len_data = 0
+    # 可以使用block按照blocksize大小读取，overlap是重叠大小
+    for block in sf.blocks(wav_path, blocksize=1024, overlap=0):
+        len_data += block.shape[0]
+    # print(len_data)
+    # print(data1.shape[0])
+    # print(list_data)
+    # print(data1 == list_data)
     # print(blocks.shape)
-    print(rms)
-    print(type(data1))
-    pcm_path = r""
+    # print(rms)
+    # print(type(data1))
+    pcm_path = r"./AudioPath/周杰伦 - 听妈妈的话.pcm"
+    # 使用read读取pcm文件
+    data2, sr = sf.read(pcm_path, samplerate=44100, format="RAW", subtype="PCM_16", channels=2, dtype="int16")
+    # print(data2==data1)
+    print(type(data1[0][0]))
+    print(data2)
+    print(data2[0][0])
+    # sf.write(r'./AudioPath/stereo_file.wav', np.random.randn(10, 2), 44100, 'PCM_24')
+    info_wav = sf.info(wav_path)
+    info_pcm = sf.info(pcm_path)
+    print(info_wav)
+    print("*"*20)
+    print(info_pcm)
 
 
 if __name__ == "__main__":
