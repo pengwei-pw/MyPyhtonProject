@@ -1,5 +1,5 @@
 import time
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformersdemo import SentenceTransformer, util
 import pandas as ps
 # 初始化模型
 start_time = time.time()

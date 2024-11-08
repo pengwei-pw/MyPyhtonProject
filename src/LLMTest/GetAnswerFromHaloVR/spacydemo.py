@@ -4,7 +4,7 @@ import time
 
 start_time = time.time()
 nlp_zh = spacy.load("zh_core_web_sm")
-df = ps.read_excel(r"./AI问答-1012-2轮case.xlsx", sheet_name="泛化语义")
+df = ps.read_excel(r"./模型比较&语义相似度.xlsx", sheet_name="相同语义泛化语料")
 # 定义要比较的两个句子
 # sentence1 = "我对红瓤西瓜情有独钟，喜欢吃它"
 # sentence2 = "我喜欢吃红瓤西瓜"
