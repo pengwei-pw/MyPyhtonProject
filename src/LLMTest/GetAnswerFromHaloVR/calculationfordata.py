@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as ps
 
 
-df = ps.read_excel(r"./模型比较&语义相似度.xlsx", sheet_name="相同语义泛化语料")
+df = ps.read_excel(r"./模型比较&语义相似度.xlsx", sheet_name="相同语义语料")
 sentence_transformers_data = []
 spacy_data = []
 bert_data = []
