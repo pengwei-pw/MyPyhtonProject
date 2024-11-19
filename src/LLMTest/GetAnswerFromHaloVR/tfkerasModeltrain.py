@@ -1,6 +1,6 @@
 import pandas as ps
 
-df = ps.read_excel(r"C:\Users\AutoTest_1\Desktop\模型比较&语义相似度.xlsx", sheet_name="示例")
+df = ps.read_excel(r"C:\Users\AutoTest_1\Desktop\模型比较&语义相似度.xlsx", sheet_name="Sheet3")
 
 
 
@@ -31,7 +31,7 @@ for index, row in df.iterrows():
 
 -6.根据我的示例对待打分的问答对打分。 
 
--7.给出思考过程并给出结果accuracy。 
+-7.不用给出思考过程并给出结果accuracy。 
 
 我的示例如下: 
 
@@ -53,7 +53,7 @@ accuracy：3
 
 模型结果： 
 
--accuracy： 
+-accuracy：
 
 """
     if type_l=="上下文":

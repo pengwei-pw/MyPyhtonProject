@@ -1,6 +1,9 @@
-# author : PengWei
-# function : 
-# time : 2023/2/21 22:57
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# @FileName  :PcmWavConvert.py
+# @Time      :2024/11/15 15:10:53
+# @Author    :PengWei
+
 import os
 import numpy as np
 import soundfile as sf
@@ -33,11 +36,21 @@ def load_pcm(speech_path, channel_num):
     return speech_data, 'success'
 
 
-def output_wave(speech_path, speech, sr):
+def output_wave(speech_path, speech, sr:int):
     speech = speech/32768
-    sf.write(speech_path, speech, 'PCM_16')
+    sf.write(speech_path, speech, sr, 'PCM_16')
 
 
 def output_pcm(output_pcm_path, speech):
     new_pcm = np.memmap(output_pcm_path, dtype='h', mode='w+', shape=speech.shape)
     new_pcm[:] = speech[:]
+
+
+if __name__ == "__main__":
+    pcm_path = r"D:\pw\唤醒识别\noise_cdx707\noise_r"
+    wav_path = r"D:\pw\唤醒识别\noise_cdx707\noisewav"
+    for file in os.listdir(pcm_path):
+        pa = os.path.join(pcm_path, file)
+        file_data, _ = load_pcm(pa, channel_num=8)
+        wav_data = file_data[:, 0:2]
+        output_wave(speech_path=pa.replace('.pcm', '.wav'), speech=wav_data, sr=16000)
