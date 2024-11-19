@@ -17,8 +17,9 @@ def decorator(fun):
     return wrapper
 
 @decorator
-def test_demo():
+def test_demo(*args, **kwargs):
+    print(args)
+    print(kwargs)
     print("hello decorator")
 
-
-test_demo()
+test_demo("test1", 1024, "name=kuuleiliya", name="wpeng23")

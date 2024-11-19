@@ -4,7 +4,7 @@
 # @Time      :2024/11/19 14:33:27
 # @Author    :PengWei
 
-descriptions = """
+descriptions = r"""
 皮尔逊相关系数（Pearson Correlation Coefficient）是衡量两个变量之间线性关系强度的统计指标，通常用符号 \( r \) 来表示。它可以用来判断两个变量是否存在线性相关关系，且相关的方向（正相关或负相关）以及相关程度（强度）有多大。
 
 ### 1. 皮尔逊相关系数的计算公式
