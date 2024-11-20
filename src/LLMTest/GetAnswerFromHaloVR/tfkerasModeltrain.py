@@ -41,7 +41,7 @@ for index, row in df.iterrows():
 
 模型回答：空间站多功能光学设施的主要任务是大规模天文巡天。 
 
-accuracy：3 
+accuracy：4 
 
 待打分的问答对： 
 
@@ -56,7 +56,7 @@ accuracy：3
 -accuracy：
 
 """
-    if type_l=="上下文":
+    if type_l=="事实类问题":
         print(f"---------------{index}")
         print(templet_q)
         print("=============================================")
