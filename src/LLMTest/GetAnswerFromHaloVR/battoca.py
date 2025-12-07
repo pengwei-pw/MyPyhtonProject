@@ -1,6 +1,7 @@
 import time
 from sentence_transformersdemo import SentenceTransformer, util
 import pandas as ps
+
 # 初始化模型
 start_time = time.time()
 model = SentenceTransformer('all-MiniLM-L6-v2')
