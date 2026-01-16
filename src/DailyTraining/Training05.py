@@ -28,7 +28,7 @@ def remove_punctuation(text):
     return result
 
 def analyze_faq_excel():
-    faq_excel_path = r"C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\new0910_PP_003\【Baseline】【CD483-H】【Ford】【Halo】【V2.0】LLM_车知识FAQ_1017.xlsx"
+    faq_excel_path = r"C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\12月MRD&车书FAQ更新\12月MRD&车书FAQ更新\FAQ_CX483ICA2-V3.0\【CX483-H】【Ford】【Halo】【V3.0】LLM_车知识FAQ_1118.xlsx"
     df_faq = pd.read_excel(faq_excel_path, sheet_name='车知识专家FAQ')
     df_faq_temp = pd.DataFrame(columns=['一级分类', '二级分类', 'Query', '参考答案'])
     index_i = 0
@@ -58,6 +58,6 @@ def analyze_faq_excel():
                     answer = ''
                     query_list = []
 
-    df_faq_temp.to_excel(r'C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\new0910_PP_003\CX483-H-FAQ.xlsx', index=False)
+    df_faq_temp.to_excel(r'C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\1225_004\CX483-H-FAQ.xlsx', index=False)
 if __name__ == "__main__":
     analyze_faq_excel()

@@ -24,7 +24,7 @@ def demo2():
         
 from openpyxl import Workbook
 def demo3():
-    path1 = r'C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\new0910_PP_003\CX483-H-FAQ.xlsx'
+    path1 = r"C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\1225_004\CD542-5DR-H-FAQ.xlsx"
     df1 = pd.read_excel(path1, sheet_name='Sheet1')
     wb = Workbook()
     ws = wb.active
@@ -41,7 +41,7 @@ def demo3():
 
         # ws.merge_cells(start_row=index + 2 + 2*index, start_column=3, end_row=index + 2 + 2*(index+1), end_column=3)
         cell = ws.cell(row=index + 2, column=3)
-        if row['二级分类'] in ['用车顾问-FAQ']:
+        if row['二级分类'] in ['FAQ']:
             text = f'按照{row["Query"]}预期结果回答，给出参考答案为：' + '\n' + row["参考答案"]
         elif row['二级分类'] in ['车知识专家-车书', '车知识专家-用车顾问', '车知识专家-网络搜索']:
             text = f'按照{row["Query"]}合理回答即可,给出参考答案为：' + '\n' + row["参考答案"]
@@ -85,7 +85,7 @@ def demo3():
         cell.value = f'语音唤醒发出指令{row["Query"]}'
 
         cell = ws.cell(row=index + 2, column=13)
-        if row['二级分类'] in ['用车顾问-FAQ']:
+        if row['二级分类'] in ['FAQ']:
             text = '1.识别正确' +'\n'+ '2.落域正确' +'\n'+ '3.TTS播报必须为：{0}'.format(row["参考答案"])
         elif row['二级分类'] in ['车知识专家-车书', '车知识专家-用车顾问', '车知识专家-网络搜索']:
             text = '1.识别正确' +'\n'+ '2.落域正确' +'\n'+ '3.TTS播报合理即可，参考答案：{0}'.format(row["参考答案"])
@@ -97,7 +97,7 @@ def demo3():
         cell = ws.cell(row=index + 2, column=14)
         if row['二级分类'] in ['车知识专家-车书', '车知识专家-用车顾问', '车知识专家-网络搜索']:
             text = f'车知识Automation'
-        elif row['二级分类'] in ['用车顾问-FAQ']:
+        elif row['二级分类'] in ['FAQ']:
             text = '车知识FAQAutomation'
         else:
             text = 'AI问答Automation'
@@ -112,12 +112,13 @@ def demo3():
         cell.value = 'Completed'
 
 
-    wb.save(r'C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\new0910_PP_003\CX483-H-FAQ_testrail_upllm.xlsx')
+    wb.save(r"C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\1225_004\CD542-5DR-H-FAQ-Testrail.xlsx")
 
 def ss():
-    pd.read_excel(r'C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\new0910_PP_003\CarBit_Performance_Case.xlsx').to_csv(r'C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\new0910_PP_003\CarBit_Performance_Case22222.csv',
+    pd.read_excel(r"C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\1225_004\CX483-H-FAQ-testrail.xlsx").to_csv(r"C:\Users\pengw\Desktop\HALO\LLM\llm测试语料\1225_004\CX483-H-FAQ-testrail.csv",
             encoding='utf_8_sig',
             index=False,)
 
 if __name__ == "__main__":
+    # demo3()
     ss()
