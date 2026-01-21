@@ -5,8 +5,16 @@
 # @Author    :PengWei
 import win32com.client as win32
 import os
+import re
 import pandas as pd
 from pathlib import Path
+
+def clean_text(s):
+    # 去除Unicode中常见的零宽字符等
+    s = re.sub(r'[\u200B-\u200D\uFEFF]', '', s)
+    # 去除前后空白字符（空格、换行、制表符等）
+    s = s.strip()
+    return s
 
 def orderlyTestRail(Test_case_Folder, Test_run_Folder, automation_sheet, out_path):
     # test rail 导出的xls是缺损文件，代码无法打开，先修复
@@ -73,7 +81,7 @@ def orderlyTestRail(Test_case_Folder, Test_run_Folder, automation_sheet, out_pat
 
     # 先合并test case和test run合并后，再将结果和自动化维护表格合并
     test_run_cols =  ['Case ID', 'ID'] 
-    automation_cols = ['ID', 'Automation_Y', '分类/依赖', '责任人-483', '责任人-542', 'Comments', 'Script Name', '是否开发', '不能开发原因']
+    automation_cols = ['ID', 'Automation_Y', '分类/依赖', '责任人483', '责任人542', 'Comments', 'Script Name', '是否开发', '不能开发原因']
     for module in test_run_modules.keys():
         if module in test_case_modules.keys() and module in automation_sheet_Modules.keys():
             print(f"正在处理模块: {module}")
@@ -83,8 +91,29 @@ def orderlyTestRail(Test_case_Folder, Test_run_Folder, automation_sheet, out_pat
             # test case保留所有列，test run只保留部分列
             # 读取B表，如果存在所需列
             print(f"Automation DF columns after filtering: {automation_df.columns.tolist()}")
-            automation_cols = [col for col in automation_cols if col in automation_df.columns]
-            automation_df = automation_df[automation_cols]  # 显式选择所需列
+            # for col in automation_df.columns:
+            #     col_renamed = clean_text(col).replace(' ', '').strip()
+            #     automation_df = automation_df.rename(columns={col: col_renamed})
+            # if module == 'Vr':
+            #     for col in automation_df.columns:
+            #         print(f"{col.encode('utf-8')}")
+            #         print(f"{col}: {col.encode('utf-8')}")
+            # automation_cols = [col for col in automation_cols if col in automation_df.columns]
+
+            # 先统一列名：去空格和零宽字符
+            automation_cols_clean = [col.replace(' ', '').strip() for col in automation_cols]
+            automation_df.columns = [clean_text(col).replace(' ', '').strip() for col in automation_df.columns]
+
+            # 保留在df中存在的列
+            automation_cols_filtered = [col for col in automation_cols_clean if col in automation_df.columns]
+
+            # 选择列
+            automation_df = automation_df[automation_cols_filtered]
+            print(f"Automation DF columns after filtering: {automation_df.columns.tolist()}")
+
+            # cols_set = set(automation_df.columns)
+            # automation_cols = [col for col in automation_cols if col in cols_set]
+            # automation_df = automation_df[automation_cols]  # 显式选择所需列
             print(f"Automation DF columns after filtering: {automation_df.columns.tolist()}")
 
             # 读取C表，如果存在所需列
@@ -119,7 +148,6 @@ def orderlyTestRail(Test_case_Folder, Test_run_Folder, automation_sheet, out_pat
         print(f"处理后的文件已保存为 {out_path}")
     except Exception as e:
         print(f"保存文件时出错: {e}")
-
             
 import time
 def fix_xls(path_to_xls):
